@@ -1,0 +1,96 @@
+<div class="container" ng-controller="SignupController as signupCtrl">
+	<div class="col-xs-12 pull-right">
+	<fieldset>
+
+	<form name="regForm" novalidate>
+	  <div class="form-group form-horizontal">
+	    <label for="username" class="col-xs-4 col-form-label">First Name: <em>{{ signupCtrl.user.username }}</em> </label>
+		<div class="col-xs-8">
+		    <input type="text" class="form-control" id="username" name="username" placeholder="First Name"
+	          ng-model="signupCtrl.user.username"
+	          required
+	          minlength="4"
+	          ng-maxlength="10">
+          <span 
+            ng-if="(regForm.username.$error.minlength || regForm.username.$error.required) && regForm.username.$touched">
+            Username must be at least 4 characters long
+          </span>
+          <span ng-if="regForm.username.$error.maxlength && regForm.username.$touched">
+            Username must not be longer than 10 characters
+          </span>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="last_name" class="col-xs-4 col-form-label">Last Name:  <em>{{ signupCtrl.user.last_name }}</em></label>
+		<div class="col-xs-8">
+		    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name"
+	          ng-model="signupCtrl.user.last_name"
+	          required
+	          minlength="4"
+	          ng-maxlength="10">
+          <span 
+            ng-if="(regForm.last_name.$error.minlength || regForm.last_name.$error.required) && regForm.last_name.$touched">
+            Last name must be at least 4 characters long
+          </span>
+          <span ng-if="regForm.last_name.$error.maxlength && regForm.last_name.$touched">
+            Last name must not be longer than 10 characters
+          </span>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="email" class="col-xs-4 col-form-label">Email address:  <em>{{ signupCtrl.user.email }}</em> </label>
+		<div class="col-xs-8">
+		    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email"
+		    ng-model="signupCtrl.user.email" required>
+          <span ng-if="regForm.email.$invalid && regForm.email.$touched">
+            Must be a valid email address: handle@domain format
+          </span>
+		</div>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="telephone" class="col-xs-4 col-form-label">Telephone:  <em>{{ signupCtrl.user.phone }}</em></label>
+	    <div class="col-xs-8">
+	      <input class="form-control" type="tel" placeholder="1-555-555-5555" id="phone" name="phone"
+	      ng-model="signupCtrl.user.phone"
+          pattern="(\d{1})-(\d{3})-(\d{3})-(\d{4})">
+          <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">
+            Phone must be in the format #-###-###-####.
+          </span>
+	    </div>
+	  </div>
+
+      <div class="form-group">
+        <label for="favorite" class="col-xs-4 control-label">Favorite Dish: <em>{{ signupCtrl.user.favorite }}</em></label>
+        <div class="col-xs-8">
+          <input type="text" class="form-control" id="favorite" name="favorite" placeholder="Favorite Dish"
+            ng-model="signupCtrl.user.favorite"
+            required>
+          <span class="signup-error" ng-if="signupForm.favorite.$error.required && signupForm.favorite.$touched">
+            A Favorite Dish is required
+          </span>
+          <span class="signup-error" ng-if="signupCtrl.dishNotFound">
+            No such menu number exists.
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+	      <button  type="submit" class="btn btn-primary col-xs-2"
+	      ng-disabled="regForm.$invalid"
+	      ng-click="signupCtrl.submit()">Submit</button>
+        </div>
+      </div>
+
+	</form>
+	</fieldset>
+
+	</div>
+    <div ng-if="signupCtrl.complete" class="col-sm-offset-4 col-sm-8" style="margin-top: 15px;">
+	<p>&nbsp;</p>
+    <span class="alert alert-success">
+      <strong>Your information has been saved.</strong>
+      </span>
+    </div>
+</div>
